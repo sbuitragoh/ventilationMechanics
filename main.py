@@ -1,9 +1,8 @@
 import numpy as np
-from matplotlib import pyplot as plt
 import ventilationMode as vm
 import graphFunctions as gf
 
-# Press the green button in the gutter to run the script.
+# Test for the system
 if __name__ == '__main__':
     vent = vm.ventMode("Pressure", "AC")
     vent.evergreenParam(P_lim = 100, PEEP = 5, bpm = 15, IE = np.array([1, 3]))
