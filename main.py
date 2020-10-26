@@ -5,8 +5,8 @@ import graphFunctions as gf
 # Test for the system
 if __name__ == '__main__':
     vent = vm.ventMode("Pressure", "AC")
-    vent.evergreenParam(P_lim = 100, PEEP = 5, bpm = 15, IE = np.array([1, 3]))
-    vent.opcParam(r_s = 0.5)
+    vent.evergreenParam(P_lim=100, PEEP=5, bpm=15, IE=np.array([1, 3]))
+    vent.opcParam(r_s=0.5)
     vent.calcParam()
 
     x = np.arange(0, vent.t_Total, 0.1)
@@ -19,8 +19,8 @@ if __name__ == '__main__':
                           P_lim = vent.P_lim,
                           control = vent.control)
 
-    gf.valuesGraph(PEEP = vent.PEEP,
-                P_lim = vent.P_lim,
-                x = x,
-                g = graph,
-                bpm = vent.bpm)
+    gf.valuesGraph(PEEP=vent.PEEP,
+                P_lim=vent.P_lim,
+                x=x,
+                g=graph,
+                bpm=vent.bpm)
