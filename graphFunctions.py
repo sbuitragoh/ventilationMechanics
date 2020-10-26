@@ -24,12 +24,13 @@ def fx(x,t_I, t_IE, cnt, t_Total, P_lim, b, control):
 def valuesGraph(PEEP, P_lim, x, g, bpm):
     y = PEEP + ((P_lim - PEEP) * (np.divide(g, np.max(g))))
 
+    newX = np.arange(0., 60, 0.1)
+    newY = np.tile(y, bpm)
+
     fig = plt.figure()
     ax_gen = fig.add_axes([0.1, 0.1, 0.8, 0.8])
     ax_prof = fig.add_axes([0.55, 0.55, 0.3, 0.3])
 
-    newX = np.arange(0., 60, 0.1)
-    newY = np.tile(y, bpm)
     ax_gen.plot(newX, newY)
     ax_gen.set_ylim(0, np.max(newY) + 10)
     ax_gen.set_xlim(0, np.max(newX))
@@ -43,4 +44,5 @@ def valuesGraph(PEEP, P_lim, x, g, bpm):
     ax_prof.set_ylabel('P_ao')
     ax_prof.set_xlabel('Time (s)')
     ax_prof.set_title('Profile')
+
     plt.show()
