@@ -22,5 +22,5 @@ class VentMode:
         self.t_ie = 60 / self.bpm
         self.t_i = self.t_ie * self.ie[0] / np.sum(self.ie)
         self.t_e = self.t_ie * self.ie[1] / np.sum(self.ie)
-        self.t_total = self.t_ie + self.t_apn
+        self.t_total = self.t_ie
         self.b = self.r_s * self.t_i

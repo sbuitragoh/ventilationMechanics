@@ -1,20 +1,27 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
+def graph_press(control, x, p_lim, peep, b, t_i, t_ie, t_total):
 
-def graph_press(t_i, t_ie, x, t_total, b, p_lim, control):
     graph = []
-    cnt = p_lim / b ** 2 if control is "Pressure" else t_i / np.exp(-2 * t_i)
+    cnt = p_lim / b ** 2 if control == "Pressure" else t_i / np.exp(-2 * t_i)
     for i in range(len(x)):
-        value = fx(x[i], t_i, t_ie, cnt, t_total, p_lim, b, control)
+        args = (x[i], p_lim, cnt)
+        kwargs = {"b": b,
+                  "t_i": t_i,
+                  "t_ie": t_ie,
+                  "t_total": t_total}
+        value = fx(control, *args, **kwargs)
         if value is None:
             value = 0
         graph.append(value)
 
-    return graph
+    y = peep + ((p_lim - peep) * (np.divide(graph, np.max(graph))))
 
+    return y
 
-def fx(x, t_i, t_ie, cnt, t_total, p_lim, b, control):
+def fx(control, x, p_lim, cnt, b, t_i, t_ie, t_total):
+
     if t_ie < x <= t_total:
         return 0
     if control == "Pressure":
@@ -29,13 +36,19 @@ def fx(x, t_i, t_ie, cnt, t_total, p_lim, b, control):
             return x
         elif t_i < x <= t_ie:
             return cnt * np.exp(-2 * x)
+    elif control == "Shark":
+        if 0 < x <= t_i:
+            return p_lim - (p_lim / t_i ** 2) * (x - t_i) ** 2
+        elif t_i < x <= t_ie:
+            return (p_lim * np.exp(2 * t_i)) * np.exp(-2 * x)
 
 
-def values_graph(peep, p_lim, x, g, bpm):
-    y = peep + ((p_lim - peep) * (np.divide(g, np.max(g))))
+def values_graph(**kwargs):
+
+    peep, bpm, x, y = kwargs['peep'], kwargs['bpm'], kwargs['x'], kwargs['y']
 
     new_x = np.arange(0., 60, 0.1)
-    new_y = np.tile(y, bpm)
+    new_y = np.tile(y, bpm)[:np.shape(new_x)[0]]
 
     fig = plt.figure()
     ax_gen = fig.add_axes([0.1, 0.1, 0.8, 0.8])
@@ -54,5 +67,17 @@ def values_graph(peep, p_lim, x, g, bpm):
     ax_prof.set_ylabel('P_ao')
     ax_prof.set_xlabel('Time (s)')
     ax_prof.set_title('Profile')
+
+    plt.show()
+
+    fig_2 = plt.figure()
+    ax_pr = fig_2.add_axes([0.1, 0.1, 0.8, 0.8])
+
+    ax_pr.plot(x, y)
+    ax_pr.set_ylim(peep, np.max(y) + 10)
+    ax_pr.set_xlim(0, np.max(x))
+    ax_pr.set_ylabel('P_ao')
+    ax_pr.set_xlabel('Time (s)')
+    ax_pr.set_title('Profile')
 
     plt.show()

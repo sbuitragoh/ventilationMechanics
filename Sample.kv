@@ -1,0 +1,21 @@
+#:import MeshLinePlot kivy_garden.graph.MeshLinePlot
+Logic:
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint: [1, .5]
+            Graph:
+                id: graph
+                xlabel: "seg"
+                ylabel: "cm H20"
+        BoxLayout:
+            size_hint: [1, .2]
+            orientation: "horizontal"
+            Button:
+                text: "START"
+                bold: True
+                on_press: root.start()
+            Button:
+                text: "STOP"
+                bold: True
+                on_press: root.stop()
