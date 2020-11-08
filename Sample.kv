@@ -9,7 +9,19 @@ Logic:
                 xlabel: "seg"
                 ylabel: "cm H20"
         BoxLayout:
-            size_hint: [1, .2]
+            size_hint: [1, .5]
+            Graph:
+                id: graph2
+                xlabel: "seg"
+                ylabel: "L/min"
+        BoxLayout:
+            size_hint: [1, .5]
+            Graph:
+                id: graph3
+                xlabel: "seg"
+                ylabel: "L"
+        BoxLayout:
+            size_hint: [1, .1]
             orientation: "horizontal"
             Button:
                 text: "START"
