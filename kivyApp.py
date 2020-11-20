@@ -1,6 +1,7 @@
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy_garden.graph import MeshLinePlot, LinePlot
 from kivy.clock import Clock
 from threading import Thread
@@ -22,8 +23,16 @@ def get_values():
                 flow.append(line//2)
                 volume.append(line-10)
 
+class mainWindow(Screen):
+    pass
 
-class Logic(BoxLayout):
+class secondWindow(Screen):
+    pass
+
+class windowManager(ScreenManager):
+    pass
+
+class Logic(Screen):
     def __init__(self, **kwargs):
         super(Logic, self).__init__(**kwargs)
         self.plot = LinePlot(line_width=2, color=[1, 0, 0, 1])
