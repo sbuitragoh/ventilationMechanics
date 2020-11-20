@@ -29,9 +29,6 @@ class mainWindow(Screen):
 class secondWindow(Screen):
     pass
 
-class windowManager(ScreenManager):
-    pass
-
 class Logic(Screen):
     def __init__(self, **kwargs):
         super(Logic, self).__init__(**kwargs)
@@ -53,9 +50,19 @@ class Logic(Screen):
         self.plot2.points = [(i, j / 1.5) for i, j in enumerate(flow)]
         self.plot3.points = [(i, j / 1.5) for i, j in enumerate(volume)]
 
+class windowManager(ScreenManager):
+    pass
+
+kv = Builder.load_file('Sample.kv')
+
+sm = ScreenManager()
+sm.add_widget(mainWindow(name='main'))
+sm.add_widget(secondWindow(name='second'))
+sm.add_widget(Logic(name='logic'))
+
 class RealTimeGraph(App):
     def build(self):
-        return Builder.load_file('Sample.kv')
+        return sm
 
 if __name__ == "__main__":
     pressure = []
