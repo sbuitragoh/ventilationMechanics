@@ -8,7 +8,7 @@ kivy-deps.sdl2==0.1.23
 kiwisolver==1.2.0
 matplotlib==3.3.2
 numpy==1.19.2
-Pillow==8.0.1
+Pillow>=8.0.1
 Pygments==2.7.2
 pyparsing==2.4.7
 pypiwin32==223
